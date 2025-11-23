@@ -56,11 +56,13 @@ pnpm add zod zod-persian-tools
 
 # yarn
 yarn add zod zod-persian-tools
+```
 
-🚀 راهنمای استفاده
+## 🚀 راهنمای استفاده
 ۱. استفاده با Zod (پیشنهادی)
 بهترین روش استفاده، ترکیب کردنش با اسکیمای Zod هست. خودش هم ولیدیت میکنه هم تمیزکاری.
 
+```bash
 import { z } from "zod";
 import { ir } from "zod-persian-tools";
 
@@ -97,20 +99,26 @@ if (utils.isNationalId("0071234567")) {
 // دریافت نام بانک از روی شماره کارت
 const bankName = utils.getBankInfo("603799...").name;
 console.log(bankName); // "بانک ملی ایران"
+```
 
-📚 لیست متدها (API)
-<h3>👤 احراز هویت (Identity)</h3> <table width="100%"> <thead> <tr> <th width="25%">متد (Method)</th> <th width="45%">توضیحات</th> <th width="30%">خروجی نهایی</th> </tr> </thead> <tbody> <tr> <td><code>ir.nationalId()</code></td> <td>بررسی صحت ساختار و الگوریتم <strong>کد ملی</strong> (۱۰ رقم)</td> <td><code>string</code> (English Digits)</td> </tr> <tr> <td><code>ir.shenaseMelli()</code></td> <td>بررسی <strong>شناسه ملی</strong> اشخاص حقوقی و شرکت‌ها</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.passport()</code></td> <td>بررسی فرمت <strong>گذرنامه</strong> (شروع با حرف انگلیسی + عدد)</td> <td><code>string</code></td> </tr> </tbody> </table>
+## 🛠 لیست متدها (API)
 
-<h3>💳 مالی و بانکی (Finance)</h3> <table width="100%"> <thead> <tr> <th width="25%">متد (Method)</th> <th width="45%">توضیحات</th> <th width="30%">خروجی نهایی</th> </tr> </thead> <tbody> <tr> <td><code>ir.bankCard()</code></td> <td>بررسی الگوریتم Luhn کارت بانکی (حذف خودکار فاصله/خط‌تیره)</td> <td><code>string</code> (16 Digits)</td> </tr> <tr> <td><code>ir.bankCardFrom(bank)</code></td> <td>اعتبارسنجی کارت متعلق به <strong>بانک خاص</strong> (مثلاً: <code>'mellat'</code>)</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.sheba()</code></td> <td>بررسی صحت <strong>شماره شبا</strong> (پشتیبانی با/بدون IR)</td> <td><code>string</code> (With IR)</td> </tr> <tr> <td><code>ir.price()</code></td> <td>حذف کاما (<code>,</code>) و تبدیل اعداد فارسی به فرمت عددی</td> <td><code>number</code></td> </tr> </tbody> </table>
+متد,توضیحات,ورودی نمونه,خروجی نهایی
+ir.nationalId(),اعتبارسنجی کد ملی,"""0012345678""",string
+ir.shenaseMelli(),شناسه ملی حقوقی,"""1010...""",string
+ir.mobile(),موبایل (تمام اپراتورها),"""۰۹۱۲...""","""0912..."""
+ir.mobileOperator(op),موبایل با اپراتور خاص,"""0935...""",string
+ir.bankCard(),شماره کارت (همه بانک‌ها),"""6037-99...""","""603799..."""
+ir.bankCardFrom(bank),کارت بانک خاص,"""6104...""",string
+ir.sheba(),شماره شبا (با/بدون IR),"""IR120...""",string
+ir.price(),قیمت (حذف کاما + تبدیل),"""1,000""",number
+ir.postalCode(),کد پستی ۱۰ رقمی,"""1234567890""",string
+ir.jalaliDate(),تاریخ شمسی,"""1402/01/01""",string
+ir.passport(),شماره گذرنامه,"""A12345678""",string
 
-<h3>📞 تماس و ارتباطات (Contact)</h3> <table width="100%"> <thead> <tr> <th width="25%">متد (Method)</th> <th width="45%">توضیحات</th> <th width="30%">خروجی نهایی</th> </tr> </thead> <tbody> <tr> <td><code>ir.mobile()</code></td> <td>بررسی شماره موبایل ایران (فرمت <code>09xxxxxxxxx</code>)</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.mobileOperator(op)</code></td> <td>بررسی موبایل با محدودیت <strong>اپراتور</strong>
 
+## ❤️ مشارکت (Contribute)
 
-<code>'mci'</code>, <code>'irancell'</code>, <code>'rightel'</code>, <code>'shatel'</code></td> <td><code>string</code></td> </tr> <tr> <td><code>ir.landline()</code></td> <td>بررسی تلفن ثابت (با پیش‌شماره استان)</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.postalCode()</code></td> <td>بررسی کد پستی ۱۰ رقمی</td> <td><code>string</code></td> </tr> </tbody> </table>
-
-<h3>🛠 ابزارهای کاربردی (Utils)</h3> <table width="100%"> <thead> <tr> <th width="25%">متد (Method)</th> <th width="45%">توضیحات</th> <th width="30%">خروجی نهایی</th> </tr> </thead> <tbody> <tr> <td><code>ir.jalaliDate()</code></td> <td>بررسی فرمت صحیح تاریخ شمسی (<code>1402/01/01</code>)</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.persianChars()</code></td> <td>اطمینان از اینکه ورودی فقط شامل <strong>حروف فارسی</strong> است.</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.vehiclePlate()</code></td> <td>بررسی فرمت استاندارد <strong>پلاک خودرو</strong></td> <td><code>string</code></td> </tr> </tbody> </table>
-
-❤️ مشارکت (Contribute)
 این پروژه Open Source هست و متعلق به جامعه برنامه‌نویسان ایران.
 
 اگه باگی پیدا کردی، Issue بزن.
