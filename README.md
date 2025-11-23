@@ -1,69 +1,120 @@
-# 🧰 جعبه‌ابزار ایرانی Zod (Zod Persian Tools)
+<div align="center">
 
-[![npm version](https://img.shields.io/npm/v/zod-persian-tools?color=blue)](https://www.npmjs.com/package/zod-persian-tools)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue)](https://www.typescriptlang.org/)
+# 🇮🇷 Zod Persian Tools
 
-آقا خسته نشدی انقدر برای اعتبارسنجی **کد ملی**، **شماره کارت** و **موبایل** هی رفتی از پروژه‌های قبلیت Regex کپی-پیست کردی؟ 🤯
+**کامل‌ترین جعبه‌ابزار اعتبارسنجی و اصلاح داده‌های ایرانی برای Zod**
 
-این پکیج اومده که نجاتت بده! یه اکستنشن ترتمیز برای **Zod** که همه چی رو برات هندل می‌کنه. فقط ولیدیت نمی‌کنه، بلکه دیتای کاربر رو **تمیز** هم می‌کنه (اعداد فارسی رو انگلیسی می‌کنه، "ی" و "ک" عربی رو درست می‌کنه و...).
+[![npm version](https://img.shields.io/npm/v/zod-persian-tools?color=3b82f6&label=npm+package)](https://www.npmjs.com/package/zod-persian-tools)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue)](https://www.typescriptlang.org/)
+[![Downloads](https://img.shields.io/npm/dt/zod-persian-tools?color=green)](https://www.npmjs.com/package/zod-persian-tools)
 
-خلاصه که: **بنویس و لذت ببر!** ☕
+<p align="center">
+  <a href="#-ویژگیها">ویژگی‌ها</a> •
+  <a href="#-نصب">نصب</a> •
+  <a href="#-راهنمای-استفاده">راهنمای استفاده</a> •
+  <a href="#-لیست-متدها-api">لیست متدها</a> •
+  <a href="#-مشارکت">مشارکت</a>
+</p>
+
+</div>
 
 ---
 
-## ✨ ویژگی‌های خفن
+## 🧐 چرا این پکیج؟
 
-- ✅ **کد ملی & شناسه ملی:** هم فرمت رو چک می‌کنه، هم الگوریتم ریاضیش رو.
-- 💳 **کارت بانکی:** تشخیص می‌ده کارت معتبره یا نه. حتی می‌تونی بگی "فقط کارت بانک ملت رو قبول کن"!
-- 📱 **موبایل:** تشخیص اپراتور (ایرانسل، همراه اول، رایتل و شاتل).
-- 🧹 **جاروبرقی دیتا (Sanitizer):** کاربر اگه با کیبورد فارسی عدد بنویسه (`۱۲۳`) یا "ی" عربی بزنه، خودکار تبدیلش می‌کنه به فرمت استاندارد دیتابیس.
-- 💰 **قیمت هوشمند:** کاربر می‌نویسه `1,200,000`، تو توی دیتابیس `1200000` (Number) تحویل می‌گیری.
+خسته نشدی از اینکه برای هر پروژه بری سراغ `Regex`های قدیمی برای چک کردن **کد ملی** یا **شماره موبایل**؟
+این پکیج یک **اکستنشن (Extension)** برای `Zod` هست که دو تا کار مهم انجام میده:
+
+1.  **Validation (اعتبارسنجی):** بررسی میکنه دیتای ورودی (مثل الگوریتم کد ملی یا کارت بانکی) درست باشه.
+2.  **Sanitization (تمیزکاری):** دیتای کثیف رو تمیز میکنه! (مثلاً اعداد فارسی رو انگلیسی میکنه، کاما رو از قیمت حذف میکنه و...).
+
+> **شعار ما:** بنویس و لذت ببر، بقیه‌ش با ما! ☕
+
+---
+
+## ✨ ویژگی‌ها
+
+* ✅ **کد ملی & شناسه ملی:** بررسی دقیق فرمت و الگوریتم ریاضی.
+* 💳 **کارت بانکی:** بررسی الگوریتم Luhn و تشخیص نام بانک.
+* 📱 **موبایل:** تشخیص اپراتور (همراه اول، ایرانسل، رایتل و...).
+* 🧹 **فارسی‌ساز هوشمند:** تبدیل خودکار اعداد فارسی/عربی (`۱۲۳`) به انگلیسی (`123`) و اصلاح حروف (`ی` و `ک`).
+* 💰 **قیمت:** دریافت قیمت فرمت‌دهی شده (`1,000,000`) و تبدیل به `Number` خالص.
 
 ---
 
 ## 📦 نصب
 
-خیلی شیک و مجلسی نصبش کن (کنار Zod):
+خیلی ساده کنار پکیج `zod` نصبش کنید:
 
 ```bash
-# اگه npm و یارانش رو داری:
+# npm
 npm install zod zod-persian-tools
 
-# اگه مثل من pnpm بازی (پیشنهادی):
+# pnpm (پیشنهادی)
 pnpm add zod zod-persian-tools
 
-# اگه yarn داری:
+# yarn
 yarn add zod zod-persian-tools
-🚀 چطوری استفاده کنیم؟خیلی ساده! ir رو ایمپورت کن و بذارش تنگِ اسکیمای Zod.TypeScriptimport { z } from "zod";
-import { ir } from "zod-persian-tools"; // اینه!
 
-const SignupSchema = z.object({
-  // ۱. کد ملی (هم ۱۰ رقم بودنش چک میشه هم الگوریتمش)
-  nationalCode: ir.nationalId("جان من کد ملی درست وارد کن"),
+🚀 راهنمای استفاده
+۱. استفاده با Zod (پیشنهادی)
+بهترین روش استفاده، ترکیب کردنش با اسکیمای Zod هست. خودش هم ولیدیت میکنه هم تمیزکاری.
 
-  // ۲. موبایل (اینجا گفتیم فقط خط‌های ایرانسل رو میخوایم!)
-  phone: ir.mobileOperator("irancell", "داداش فقط خط ایرانسل قبوله"),
+import { z } from "zod";
+import { ir } from "zod-persian-tools";
 
-  // ۳. کارت بانکی (مثلا فقط بانک ملت)
-  // خودش خط تیره و فاصله رو حذف میکنه، نگران نباش
-  cardNumber: ir.bankCardFrom("mellat", "فقط کارت ملت بده"),
+const UserSchema = z.object({
+  // اعتبارسنجی کد ملی
+  nationalCode: ir.nationalId("کد ملی اشتباه است"),
+
+  // فقط شماره‌های ایرانسل رو قبول میکنه!
+  phoneNumber: ir.mobileOperator("irancell", "فقط خط ایرانسل مجاز است"),
+
+  // کارت بانکی (مثلاً فقط بانک ملت)
+  // نکته: خط تیره و فاصله رو خودش حذف میکنه
+  cardNumber: ir.bankCardFrom("mellat", "لطفا کارت ملت وارد کنید"),
+
+  // تبدیل قیمت: کاربر میزنه "۱,۵۰۰,۰۰۰" -> شما عدد 1500000 میگیرید
+  amount: ir.price(),
   
-  // ۴. قیمت (جادوی اصلی!)
-  // کاربر میزنه: "۱,۵۰۰,۰۰۰" -> خروجی میشه: 1500000 (عدد خالص)
-  price: ir.price(),
-
-  // ۵. کد پستی
+  // کد پستی ۱۰ رقمی
   postalCode: ir.postalCode(),
 });
-استفاده بدون Zod (Helper Functions)اگه Zod نداری یا فقط میخوای یه تابع رو جدا صدا بزنی، مشکلی نیست. از utils استفاده کن:TypeScriptimport { utils } from "zod-persian-tools";
 
-// چک کردن کد ملی
-if (utils.isNationalId("1234567890")) {
-  console.log("حله!");
+۲. استفاده بدون Zod (توابع کمکی)
+اگه نخواستی از Zod استفاده کنی، می‌تونی توابع رو مستقیم صدا بزنی:
+
+TypeScript
+
+import { utils } from "zod-persian-tools";
+
+// بررسی درستی کد ملی
+if (utils.isNationalId("0071234567")) {
+  console.log("Valid!");
 }
 
-// گرفتن اسم بانک از روی شماره کارت
-const bankName = utils.getBankInfo("610433...").name; 
-console.log(bankName); // خروجی: "بانک ملت"
-🛠 لیست کامل متدهامتدتوضیحاتمثال ورودیخروجی نهاییir.nationalId()کد ملی"001..."Stringir.shenaseMelli()شناسه ملی شرکت‌ها"101..."Stringir.mobile()موبایل (همه اپراتورها)"۰۹۱۲...""0912..."ir.mobileOperator(op)موبایل با اپراتور خاص"0935..."Stringir.bankCard()شماره کارت (Luhn Check)"6037-99...""603799..."ir.bankCardFrom(bank)کارت بانک خاص"6104..."Stringir.sheba()شماره شبا (با/بدون IR)"IR120..."Stringir.price()تبدیل قیمت (حذف کاما)"1,000"1000 (Number)ir.postalCode()کد پستی"123..."Stringir.passport()گذرنامه"A123..."Stringir.jalaliDate()تاریخ شمسی"1402/01/01"String❤️ مشارکت (Contribute)آقا این پروژه اوپن‌سورسه و متعلق به خودتونه. اگه باگی دیدی، بانکی جا مونده بود یا ایده خفنی داشتی، دمت گرم Pull Request بزن یا ایشو (Issue) باز کن.📄 لایسنسMIT. حالشو ببر.
+// دریافت نام بانک از روی شماره کارت
+const bankName = utils.getBankInfo("603799...").name;
+console.log(bankName); // "بانک ملی ایران"
+
+📚 لیست متدها (API)
+<h3>👤 احراز هویت (Identity)</h3> <table width="100%"> <thead> <tr> <th width="25%">متد (Method)</th> <th width="45%">توضیحات</th> <th width="30%">خروجی نهایی</th> </tr> </thead> <tbody> <tr> <td><code>ir.nationalId()</code></td> <td>بررسی صحت ساختار و الگوریتم <strong>کد ملی</strong> (۱۰ رقم)</td> <td><code>string</code> (English Digits)</td> </tr> <tr> <td><code>ir.shenaseMelli()</code></td> <td>بررسی <strong>شناسه ملی</strong> اشخاص حقوقی و شرکت‌ها</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.passport()</code></td> <td>بررسی فرمت <strong>گذرنامه</strong> (شروع با حرف انگلیسی + عدد)</td> <td><code>string</code></td> </tr> </tbody> </table>
+
+<h3>💳 مالی و بانکی (Finance)</h3> <table width="100%"> <thead> <tr> <th width="25%">متد (Method)</th> <th width="45%">توضیحات</th> <th width="30%">خروجی نهایی</th> </tr> </thead> <tbody> <tr> <td><code>ir.bankCard()</code></td> <td>بررسی الگوریتم Luhn کارت بانکی (حذف خودکار فاصله/خط‌تیره)</td> <td><code>string</code> (16 Digits)</td> </tr> <tr> <td><code>ir.bankCardFrom(bank)</code></td> <td>اعتبارسنجی کارت متعلق به <strong>بانک خاص</strong> (مثلاً: <code>'mellat'</code>)</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.sheba()</code></td> <td>بررسی صحت <strong>شماره شبا</strong> (پشتیبانی با/بدون IR)</td> <td><code>string</code> (With IR)</td> </tr> <tr> <td><code>ir.price()</code></td> <td>حذف کاما (<code>,</code>) و تبدیل اعداد فارسی به فرمت عددی</td> <td><code>number</code></td> </tr> </tbody> </table>
+
+<h3>📞 تماس و ارتباطات (Contact)</h3> <table width="100%"> <thead> <tr> <th width="25%">متد (Method)</th> <th width="45%">توضیحات</th> <th width="30%">خروجی نهایی</th> </tr> </thead> <tbody> <tr> <td><code>ir.mobile()</code></td> <td>بررسی شماره موبایل ایران (فرمت <code>09xxxxxxxxx</code>)</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.mobileOperator(op)</code></td> <td>بررسی موبایل با محدودیت <strong>اپراتور</strong>
+
+
+<code>'mci'</code>, <code>'irancell'</code>, <code>'rightel'</code>, <code>'shatel'</code></td> <td><code>string</code></td> </tr> <tr> <td><code>ir.landline()</code></td> <td>بررسی تلفن ثابت (با پیش‌شماره استان)</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.postalCode()</code></td> <td>بررسی کد پستی ۱۰ رقمی</td> <td><code>string</code></td> </tr> </tbody> </table>
+
+<h3>🛠 ابزارهای کاربردی (Utils)</h3> <table width="100%"> <thead> <tr> <th width="25%">متد (Method)</th> <th width="45%">توضیحات</th> <th width="30%">خروجی نهایی</th> </tr> </thead> <tbody> <tr> <td><code>ir.jalaliDate()</code></td> <td>بررسی فرمت صحیح تاریخ شمسی (<code>1402/01/01</code>)</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.persianChars()</code></td> <td>اطمینان از اینکه ورودی فقط شامل <strong>حروف فارسی</strong> است.</td> <td><code>string</code></td> </tr> <tr> <td><code>ir.vehiclePlate()</code></td> <td>بررسی فرمت استاندارد <strong>پلاک خودرو</strong></td> <td><code>string</code></td> </tr> </tbody> </table>
+
+❤️ مشارکت (Contribute)
+این پروژه Open Source هست و متعلق به جامعه برنامه‌نویسان ایران.
+
+اگه باگی پیدا کردی، Issue بزن.
+
+اگه ایده جدیدی داری، Pull Request بفرست.
+
+اگه خوشت اومد، بهمون Star ⭐️ بده!
